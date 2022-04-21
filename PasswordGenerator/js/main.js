@@ -14,7 +14,8 @@
     let pwd = '';
 
     // 文字数分ランダムな文字列(パスワード)を生成する
-    for (let i = 0; i < len; i ++) {
+    // lenが0になるまで繰り返す
+    while (len --) {
       // パスワードにseed[ランダム番目]を格納する
       pwd += seed[Math.floor(Math.random() * seed.length)];
     }
