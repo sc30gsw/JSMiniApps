@@ -2,11 +2,21 @@
 
 {
   // タイプしていく単語を定義
-  const word = 'red';
+  const words = [
+    'red',
+    'blue',
+    'pink'
+  ];
+  // wordsの中からランダムでタイピングのお題となる文字を格納する変数
+  let word;
   // 現在、入力している文字が何文字目かを判定する変数
   let loc = 0;
 
   const target = document.getElementById('target');
+
+  // 配列の中からランダムに要素を取得する
+  word = words[Math.floor(Math.random() * words.length)];
+  
   // 要素のテキストを入力されたキーにする
   target.textContent = word;
 
