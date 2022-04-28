@@ -2,8 +2,8 @@
 
 {
   function setWord() {
-    // 配列の中からランダムに要素を取得する
-    word = words[Math.floor(Math.random() * words.length)];
+    // 一度現れた単語が消えるようにし、ランダムで単語を出現させる(タイピングお題の重複を避けるため)
+    word = words.splice(Math.floor(Math.random * words.length), 1)[0];
     // 要素のテキストを入力されたキーにする
     target.textContent = word;
     // 文字位置を初期化
@@ -41,6 +41,12 @@
 
     // 入力が完了した場合、次の単語をタイプできるようにする
     if (loc === word.length) {
+      // 入力する単語がなくなった場合
+      if (words.length === 0) {
+        const result = document.getElementById('result');
+        result.textContent = 'Finished!';
+        return;
+      }
       setWord();
     }
   });
