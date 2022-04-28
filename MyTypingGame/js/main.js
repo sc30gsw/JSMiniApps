@@ -12,13 +12,16 @@
 
   /** キーボードで入力した際にイベント発火 */
   document.addEventListener('keydown', e => {
+
+    // タイプしたキーが間違いの場合、処理を中断する(早期リターン)
+    if (e.key !== word[loc]) {
+      return;
+    }
     
     // タイプしたキーが正しいか場合(1文字ずつ判定する)
-    if (e.key === word[loc]) {
-      // 次の文字の判定ができるようにする
-      loc ++;
-      // アンダーバーをlocの個数分コピーし、変数wordのloc番目の文字列と結合させる
-      target.textContent = '_'.repeat(loc) + word.substring(loc);
-    }
+    // 次の文字の判定ができるようにする
+    loc ++;
+    // アンダーバーをlocの個数分コピーし、変数wordのloc番目の文字列と結合させる
+    target.textContent = '_'.repeat(loc) + word.substring(loc);
   });
 }
