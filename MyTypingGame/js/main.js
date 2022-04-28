@@ -1,6 +1,15 @@
 'use strict';
 
 {
+  function setWord() {
+    // 配列の中からランダムに要素を取得する
+    word = words[Math.floor(Math.random() * words.length)];
+    // 要素のテキストを入力されたキーにする
+    target.textContent = word;
+    // 文字位置を初期化
+    loc = 0;
+  }
+
   // タイプしていく単語を定義
   const words = [
     'red',
@@ -14,11 +23,7 @@
 
   const target = document.getElementById('target');
 
-  // 配列の中からランダムに要素を取得する
-  word = words[Math.floor(Math.random() * words.length)];
-  
-  // 要素のテキストを入力されたキーにする
-  target.textContent = word;
+  setWord();
 
   /** キーボードで入力した際にイベント発火 */
   document.addEventListener('keydown', e => {
@@ -33,5 +38,10 @@
     loc ++;
     // アンダーバーをlocの個数分コピーし、変数wordのloc番目の文字列と結合させる
     target.textContent = '_'.repeat(loc) + word.substring(loc);
+
+    // 入力が完了した場合、次の単語をタイプできるようにする
+    if (loc === word.length) {
+      setWord();
+    }
   });
 }
