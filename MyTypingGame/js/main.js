@@ -22,11 +22,18 @@
   let loc = 0;
   // スタート(クリック)した時間を記録する変数
   let startTime;
+  // ゲームプレイ中かどうかを確認する変数
+  let isPlaying = false;
 
   const target = document.getElementById('target');
 
   // クリックした際にタイピングゲームがスタートするようにする
   document.addEventListener('click', () => {
+    // クリックしたときに、ゲームプレイ中の場合、処理を中断する
+    if (isPlaying) {
+      return;
+    }
+    isPlaying = true;
     // クリックした時点の現在時刻を取得
     startTime = Date.now();
     setWord();
