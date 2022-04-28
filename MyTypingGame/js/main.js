@@ -20,10 +20,17 @@
   let word;
   // 現在、入力している文字が何文字目かを判定する変数
   let loc = 0;
+  // スタート(クリック)した時間を記録する変数
+  let startTime;
 
   const target = document.getElementById('target');
 
-  setWord();
+  // クリックした際にタイピングゲームがスタートするようにする
+  document.addEventListener('click', () => {
+    // クリックした時点の現在時刻を取得
+    startTime = Date.now();
+    setWord();
+  });
 
   /** キーボードで入力した際にイベント発火 */
   document.addEventListener('keydown', e => {
@@ -43,8 +50,11 @@
     if (loc === word.length) {
       // 入力する単語がなくなった場合
       if (words.length === 0) {
+        // 入力にかかった時間を算出
+        // 1000で割ることで秒単位とし、少数点以下2桁まで表示
+        const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(2);
         const result = document.getElementById('result');
-        result.textContent = 'Finished!';
+        result.textContent = `Finished! ${elapsedTime} seconds!`;
         return;
       }
       setWord();
